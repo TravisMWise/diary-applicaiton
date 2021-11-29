@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { useDispatch } from "react-redux";
 
+import { getPosts } from './actions/postActions';
 import diary from './images/diary.png';
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
+import Search from "./components/Search/Search";
 import useStyles from './styles';
 
 const App = () => {
     const classes = useStyles();
+
+    // Redux
+    const dispatch = useDispatch();
+    // Use action
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch]);
+    
     return (
         <Container maxWidth="lg">
             <AppBar className={classes.appBar} position="static" color="inherit">
@@ -16,7 +27,7 @@ const App = () => {
             </AppBar>
             <Container>
                 <AppBar position="static" color="inherit">
-                    <Typography variant="h4" align="center">Search/Sort</Typography>
+                    <Search />
                 </AppBar>
             </Container>
             <Grow in>

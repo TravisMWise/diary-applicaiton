@@ -1,7 +1,7 @@
 const reducer = (posts = [], action) => {
     switch (action.type) {
         case 'UPDATE':
-            return posts;
+            return action.payload;
         case 'FETCH_ALL':
             return posts;
         case 'CREATE':

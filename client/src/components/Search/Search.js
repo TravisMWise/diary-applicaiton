@@ -1,14 +1,13 @@
-import { Container, Typography} from '@material-ui/core';
+import { Container, Typography, AppBar} from '@material-ui/core';
 import React from 'react';
 import useStyles from './styles';
 
 const Search = () => {
     const classes = useStyles();
     return (
-        <Container maxWidth="lg">
-            <Typography className={classes.heading} variant="h2" align="center">Search</Typography>
-        </Container>
-        
+        <AppBar className={classes.appBar} position="static" color="inherit">
+            <Typography className={classes.heading} variant="h4" align="center">Search</Typography>
+        </AppBar>
     );
 }
 

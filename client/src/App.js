@@ -41,7 +41,6 @@ const App = () => {
                             <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Search />
                             <Form currentId={currentId} setCurrentId={setCurrentId} />
                         </Grid>
                     </Grid>

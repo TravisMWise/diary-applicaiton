@@ -12,7 +12,17 @@ const Form = () => {
     const classes = useStyles();
     
     // Use State
-    const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '', privacy: '', sharedWith: ''});
+    const [postData, setPostData] = useState({ 
+        creator: '', 
+        title: '', 
+        message: '', 
+        tags: '', 
+        selectedFile: '', 
+        location: '',
+        privacy: '', 
+        sharedWith: '', 
+        isAdmin: '',
+    });
     
     // api dispatch
     const dispatch = useDispatch();
@@ -40,23 +50,30 @@ const Form = () => {
                 <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
 
                 {/* Message */}
-                <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
+                <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={10} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
 
                 {/* Tags */}
                 <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
 
                 {/* File */}
                 <div className={classes.fileInput}>
+                    <Typography variant="h7">Image:</Typography> 
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
+                
+                {/* Location */}
+                <TextField name="location" variant="outlined" label="Location" fullWidth value={postData.location} onChange={(e) => setPostData({ ...postData, location: e.target.value })} />
 
+                
                 {/* Privacy */}
-                <RadioGroup>
-                    <FormControlLabel className={classes.radioInput} value="public" control={<Radio />} label="Public" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
-                    <FormControlLabel className={classes.radioInput} value="private" control={<Radio />} label="Private" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
-                    <FormControlLabel className={classes.radioInput} value="share" control={<Radio />} label="Share" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })} />
-                    <TextField name="sharedWith" variant="outlined" label="Share With (coma separated):" fullWidth value={postData.sharedWith} onChange={(e) => setPostData({ ...postData, sharedWith: e.target.value.split(',') })} />
-                </RadioGroup>
+                <div className={classes.privacy}>
+                    <RadioGroup>
+                        <FormControlLabel className={classes.radioInput} value="public" control={<Radio />} label="Public" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
+                        <FormControlLabel className={classes.radioInput} value="private" control={<Radio />} label="Private" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
+                        <FormControlLabel className={classes.radioInput} value="share" control={<Radio />} label="Share" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })} />
+                        <TextField name="sharedWith" variant="outlined" label="Share With (coma separated):" fullWidth value={postData.sharedWith} onChange={(e) => setPostData({ ...postData, sharedWith: e.target.value.split(',') })} />
+                    </RadioGroup>
+                </div>
 
                 {/* Submit Button */}
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>

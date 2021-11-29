@@ -3,7 +3,7 @@ const reducer = (posts = [], action) => {
         case 'UPDATE':
             return posts;
         case 'FETCH_ALL':
-            return posts;
+            return action.payload;
         case 'CREATE':
             return [...posts, action.payload];
         default:

@@ -18,6 +18,8 @@ const postSchema = mongoose.Schema({
     },
     privacy: String,
     sharedWith: [String],
+    location: String,
+    isAdmin: String,
 })
 
 const PostMessageSchema = mongoose.model('PostMessageSchema', postSchema);

@@ -1,10 +1,6 @@
 # final-project
 Final Project for POOSD
 
-To Run Server: 
-    npm i
-    npm start
-To Run Client: 
-    cd client
-    npm i 
-    npm start
+Install dependencies: npm i
+To Run Server: npm start
+To Run Client: cd client && npm start

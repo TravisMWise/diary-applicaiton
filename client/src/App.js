@@ -27,9 +27,12 @@ const App = () => {
                 <img className={classes.image} src={diary} alt="icon" height="60" />
             </AppBar>
             <Container>
-                <AppBar position="static" color="inherit">
+                
+            </Container>
+            <Container>
+                <Grid item xs={12} sm={12}>
                     <Search />
-                </AppBar>
+                </Grid>
             </Container>
             <Grow in>
                 <Container>
@@ -38,6 +41,7 @@ const App = () => {
                             <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={4}>
+                            <Search />
                             <Form currentId={currentId} setCurrentId={setCurrentId} />
                         </Grid>
                     </Grid>

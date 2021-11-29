@@ -32,7 +32,6 @@ const Form = ({ currentId, setCurrentId }) => {
     
     // Set the post information when the post value changes from the useSelector
     useEffect(() => {
-        clear();
         if (post) 
             setPostData(post);
     }, [post])
@@ -50,17 +49,17 @@ const Form = ({ currentId, setCurrentId }) => {
     }
 
     const clear = () => {
-        
-    }
-
+        setCurrentId(0);
+        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '', location: '', privacy: '', sharedWith: ''});
+    };
+    
     return (
-        // Div
         <Paper className={classes.paper}>
             {/* Form */}
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
 
                 {/* Title */}
-                <Typography variant="h6">Creating A Diary Entry</Typography>
+                <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
 
                 {/* Username */}
                 <TextField name="creator" variant="outlined" label="Creator" fullWidth  value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value})} />

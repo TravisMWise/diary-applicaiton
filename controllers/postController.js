@@ -34,12 +34,33 @@ export const updatePost = async (req, res) => {
     // Check if _id is an existing mongooseDB id
     // If it isn't then send an error message
     if (!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(404).send('No post with that id');
+        return res.status(404).send('No post with that id.');
     }
 
     // Only here if the id is valid
     const updatedPost = await PostMessageSchema.findByIdAndUpdate(_id, post, { new: true });
     
     // Send the post information
+    res.json(updatedPost);
+}
+export const deletePost = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send('No post with that id.');
+    }
+
+    await PostMessageSchema.findByIdAndRemove(id);
+    res.json({ message: 'Post deleted succesfully.' })
+}
+
+export const likePost = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send('No post with that id.');
+    }
+    
+    const post = await PostMessageSchema.findById(id); // Get the post
+    const updatedPost = await PostMessageSchema.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true }); // Update the post post.likeCount++;
+
     res.json(updatedPost);
 }

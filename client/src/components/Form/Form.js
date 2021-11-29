@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { useDispatch  } from 'react-redux';
 import FileBase from 'react-file-base64';
+import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
-import { createPost } from '../../actions/postActions';
+import { createPost, updatePost } from '../../actions/postActions';
 
-
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
     // Styles
     const classes = useStyles();
     
@@ -21,19 +21,38 @@ const Form = () => {
         location: '',
         privacy: '', 
         sharedWith: '', 
-        isAdmin: '',
     });
+    
+    // Redux
+    // Find the post with the id that we clicked on if currentId exists
+    const post = useSelector((state) => currentId 
+        ? state.postReducers.find((p) => p._id === currentId) 
+        : null
+    );
+    
+    // Set the post information when the post value changes from the useSelector
+    useEffect(() => {
+        clear();
+        if (post) 
+            setPostData(post);
+    }, [post])
+
     
     // api dispatch
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevents refresh in the browser
-        dispatch(createPost(postData));
+        if (currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+            dispatch(createPost(postData));
+        }
     }
 
     const clear = () => {
-
+        
     }
+
     return (
         // Div
         <Paper className={classes.paper}>
@@ -57,7 +76,7 @@ const Form = () => {
 
                 {/* File */}
                 <div className={classes.fileInput}>
-                    <Typography variant="h7">Image:</Typography> 
+                    <Typography>Image:</Typography> 
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
                 

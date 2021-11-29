@@ -1,3 +1,4 @@
+import { blue } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles({
@@ -45,8 +46,15 @@ export default makeStyles({
     padding: '0 16px',
   },
   cardActions: {
-    padding: '0 16px 8px 16px',
+    padding: '0 2px 1px 2px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  location: {
+    backgroundColor: 'white',
+    color: 'blue',
+    padding: '5px',
+    margin: '0px',
+    display: 'flex',
   },
 });

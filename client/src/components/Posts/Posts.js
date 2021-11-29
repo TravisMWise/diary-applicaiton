@@ -12,7 +12,7 @@ const Posts = ({ setCurrentId }) => {
     console.log(posts);
 
     return (
-        (posts === []) 
+        (posts.length < 1) 
         ? <CircularProgress /> 
         : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>

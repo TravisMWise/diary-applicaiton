@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch  } from 'react-redux';
 import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
+import { createPost } from '../../actions/postActions';
+
 
 const Form = () => {
     // Styles
     const classes = useStyles();
     
     // Use State
-    const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '', public: '', private: '', shared: '', sharedWith: ''});
-
-    const handleSubmit = () => {
-
+    const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '', privacy: '', sharedWith: ''});
+    
+    // api dispatch
+    const dispatch = useDispatch();
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevents refresh in the browser
+        dispatch(createPost(postData));
     }
+
     const clear = () => {
 
     }
@@ -46,9 +52,9 @@ const Form = () => {
 
                 {/* Privacy */}
                 <RadioGroup>
-                    <FormControlLabel className={classes.radioInput} value="public" control={<Radio />} label="Public" onChange={(e) => setPostData({ ...postData, public: e.target.value })}  />
-                    <FormControlLabel className={classes.radioInput} value="private" control={<Radio />} label="Private" onChange={(e) => setPostData({ ...postData, private: e.target.value })}  />
-                    <FormControlLabel className={classes.radioInput} value="share" control={<Radio />} label="Share" onChange={(e) => setPostData({ ...postData, share: e.target.value })} />
+                    <FormControlLabel className={classes.radioInput} value="public" control={<Radio />} label="Public" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
+                    <FormControlLabel className={classes.radioInput} value="private" control={<Radio />} label="Private" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })}  />
+                    <FormControlLabel className={classes.radioInput} value="share" control={<Radio />} label="Share" onChange={(e) => setPostData({ ...postData, privacy: e.target.value })} />
                     <TextField name="sharedWith" variant="outlined" label="Share With (coma separated):" fullWidth value={postData.sharedWith} onChange={(e) => setPostData({ ...postData, sharedWith: e.target.value.split(',') })} />
                 </RadioGroup>
 

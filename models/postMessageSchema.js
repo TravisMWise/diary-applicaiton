@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
 
 // By default, Mongoose adds an _id property to schemas.
 // schema.path('_id'); // ObjectId { ... }
-const postSchema = new Schema({
+const postSchema = mongoose.Schema({
     title: String, // String is shorthand for {type: String}
     message: String,
     creator: String,
@@ -17,9 +16,7 @@ const postSchema = new Schema({
         type: Date,
         default: new Date(),
     },
-    public: Boolean,
-    private: Boolean,
-    shared: Boolean,
+    privacy: String,
     sharedWith: [String],
 })
 

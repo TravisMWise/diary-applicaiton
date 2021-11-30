@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Server side url
-const url = 'http://localhost:5000/posts';
+const url = 'https://diary-application-poosd.herokuapp.com/posts';
 
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);

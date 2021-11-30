@@ -29,11 +29,11 @@ const App = () => {
             <Container>
                 
             </Container>
-            <Container>
+            {/* <Container>
                 <Grid item xs={12} sm={12}>
                     <Search />
                 </Grid>
-            </Container>
+            </Container> */}
             <Grow in>
                 <Container>
                     <Grid className={classes.mainContainer} container justifyContent="space-between" alignItems="stretch" spacing={3}>
